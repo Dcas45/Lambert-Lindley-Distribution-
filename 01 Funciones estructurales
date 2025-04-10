@@ -26,7 +26,7 @@ pLL <- function(x,t,a){
 
 qLL <- function(u,t,a){
   uu = 1+lambertW0(log(a)*(u-1)/a)/log(a)
-    -(lambertW1((t+1)*(uu-1)*exp(-1-t))+1+t)/t
+    -(lambertWm1((t+1)*(uu-1)*exp(-1-t))+1+t)/t
 }
 
 # ------------------------
