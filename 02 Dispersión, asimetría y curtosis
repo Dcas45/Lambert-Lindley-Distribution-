@@ -3,10 +3,10 @@
 # -----------------------
 
 library(lamW) # Para el computo de la función W de Lambert
-
-# -----------------------------------------------------
+library(plot3D) # Para el computo de graficos 3D
+# ------------------------------------------------------------------
 # Coeficiente de variación, asimetría y curtosis para figuras 2D ---
-# -----------------------------------------------------
+# ------------------------------------------------------------------
  
 cv <- function(t,a){
    m1 = -(t+1+mk(1,t,a))/t
@@ -69,5 +69,29 @@ alpha <- 2.7
 curve(kurt(x,alpha),add=TRUE,lty=5,lwd=2,col="orange")
 legend("topleft",c("0.5","0.8","1","1.5","2.7"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
+# ------------------------------------------------------------------
+# Coeficiente de variación, asimetría y curtosis para figuras 3D ---
+# ------------------------------------------------------------------
+ 
+mk <- function(k,theta,alpha){
+   n=length(theta)
+   f=rep(0,n)
+   for(i in 1:n){
+     f[i]=integrate(function(u,k,theta,alpha){lambertWm1((theta+1)*(-1+u)*exp(-1-theta))^k*alpha^u*(1-log(alpha)*(1-u))},
+       lower=0,upper=1,k=k,theta=theta[i],alpha=alpha[i])$value
+   }
+   return(f)
+ }
 
+
+cv <- function(t,a){
+   m1 = -(t+1+mk(1,t,a))/t
+   m2 = (t^2+2*t+1+2*mk(1,t,a)*t+2*mk(1,t,a)+mk(2,t,a))/t^2
+     sqrt(m2-m1^2)/m1
+}
+t<- seq(0.01,20,length=20)
+a <- seq(0.01,exp(1),length=20)
+
+z1 <- outer(t,a,function(t,a){cv(t,a)})
+persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="COEFICIENTE DE VARIACION",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
 
