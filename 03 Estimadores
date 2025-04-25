@@ -27,7 +27,7 @@ mk <- function(k,t,a){
   f=rep(0,n)
   for(i in 1:n){
     f[i]=integrate(function(u,k,t,a){lambertWm1((t+1)*(-1+u)*exp(-1-t))^k*a^u*(1-log(a)*(1-u))},
-      lower=0,upper=1,k=k,theta=theta[i],alpha=alpha)$value
+      lower=0,upper=1,k=k,t=t[i],a=a)$value
   }
   return(f)
 }
