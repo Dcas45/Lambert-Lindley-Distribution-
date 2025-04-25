@@ -84,10 +84,10 @@ alpha <- 2.7
 curve(kurt(x,alpha),add=TRUE,lty=5,lwd=2,col="orange")
 legend("topleft",c("0.5","0.8","1","1.5","2.7"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
-# ------------------------------------------------------------------
-# Coeficiente de variación, asimetría y curtosis para figuras 3D ---
-# ------------------------------------------------------------------
- 
+# ------------------------------
+# Función mk para figuras 3D --- 
+# ------------------------------
+
 mk <- function(k,theta,alpha){
    n=length(theta)
    f=rep(0,n)
@@ -98,7 +98,10 @@ mk <- function(k,theta,alpha){
    return(f)
  }
 
-
+# ------------------------------------------------------------------
+# Coeficiente de variación, asimetría y curtosis para figuras 3D ---
+# ------------------------------------------------------------------
+ 
 cv <- function(t,a){
    m1 = -(t+1+mk(1,t,a))/t
    m2 = (t^2+2*t+1+2*mk(1,t,a)*t+2*mk(1,t,a)+mk(2,t,a))/t^2
