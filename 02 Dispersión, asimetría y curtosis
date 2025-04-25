@@ -107,9 +107,37 @@ cv <- function(t,a){
    m2 = (t^2+2*t+1+2*mk(1,t,a)*t+2*mk(1,t,a)+mk(2,t,a))/t^2
      sqrt(m2-m1^2)/m1
 }
+
+skew <- function(t,a){
+   m1 = -(t+1+mk(1,t,a))/t
+   m2 = (t^2+2*t+1+2*mk(1,t,a)*t+2*mk(1,t,a)+mk(2,t,a))/t^2
+   m3 = -(t^3+3*t^2+3*t+1+3*mk(1,t,a)*t^2+6*mk(1,t,a)*t+3*mk(1,t,a)+3*mk(2,t,a)*t+3*mk(2,t,a)+mk(3,t,a))/t^3
+     (m3-3*m1*m2+2*m1^3)/(m2-m1^2)^{3/2}
+}
+
+kurt <- function(t,a){
+   m1 = -(t+1+mk(1,t,a))/t
+   m2 = (t^2+2*t+1+2*mk(1,t,a)*t+2*mk(1,t,a)+mk(2,t,a))/t^2
+   m3 = -(t^3+3*t^2+3*t+1+3*mk(1,t,a)*t^2+6*mk(1,t,a)*t+3*mk(1,t,a)+3*mk(2,t,a)*t+3*mk(2,t,a)+mk(3,t,a))/t^3
+   m4 = (t^4+4*t^3+6*t^2+4*t+1+4*mk(1,t,a)*t^3+12*mk(1,t,a)*t^2+12*mk(1,t,a)*t+4*mk(1,t,a)+6*mk(2,t,a)*t^2+12*mk(2,t,a)*t+6*mk(2,t,a)+4*mk(3,t,a)*t+4*mk(3,t,a)+mk(4,t,a))/t^4
+   (m4-4*m1*m3+6*m1^2*m2-3*m1^4)/(m2-m1^2)^{2}
+}
+
+# ---------------
+# Gráficos 3D ---
+# ---------------
+
 t<- seq(0.01,20,length=20)
 a <- seq(0.01,exp(1),length=20)
-
 z1 <- outer(t,a,function(t,a){cv(t,a)})
 persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="COEFICIENTE DE VARIACION",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
 
+t <- seq(0.01,5,length=20)
+a <- seq(0.01,exp(1),length=20)
+z1 <- outer(t,a,function(t,a){skew(t,a)})
+persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="ASIMETRIA",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
+ 
+z1 <- outer(t,a,function(t,a){kurt(t,a)})
+t <- seq(0.1,20,length=20)
+a <- seq(0.1,exp(1),length=20)
+persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="CURTOSIS",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
