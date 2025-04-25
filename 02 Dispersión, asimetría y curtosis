@@ -3,7 +3,22 @@
 # -----------------------
 
 library(lamW) # Para el computo de la función W de Lambert
-library(plot3D) # Para el computo de graficós 3D
+library(plot3D) # Para el computo de gráficos 3D
+
+# ------------------------------
+# Funcion mk para figuras 2D --- 
+# ------------------------------
+
+ mk <- function(k,theta,alpha){
+   n=length(theta)
+   f=rep(0,n)
+   for(i in 1:n){
+     f[i]=integrate(function(u,k,theta,alpha){lambertWm1((theta+1)*(-1+u)*exp(-1-theta))^k*alpha^u*(1-log(alpha)*(1-u))},
+       lower=0,upper=1,k=k,theta=theta[i],alpha=alpha)$value
+   }
+   return(f)
+ }
+
 
 # ------------------------------------------------------------------
 # Coeficiente de variación, asimetría y curtosis para figuras 2D ---
