@@ -3,7 +3,8 @@
 # -----------------------
 
 library(lamW) # Para el computo de la función W de Lambert
-library(plot3D) # Para el computo de graficos 3D
+library(plot3D) # Para el computo de graficós 3D
+
 # ------------------------------------------------------------------
 # Coeficiente de variación, asimetría y curtosis para figuras 2D ---
 # ------------------------------------------------------------------
