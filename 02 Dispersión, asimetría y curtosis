@@ -84,9 +84,9 @@ alpha <- 2.7
 curve(kurt(x,alpha),add=TRUE,lty=5,lwd=2,col="orange")
 legend("topleft",c("0.5","0.8","1","1.5","2.7"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
-# ------------------------------
+# -------------------------------
 # Función mk1 para figuras 3D --- 
-# ------------------------------
+# -------------------------------
 
 mk1 <- function(k,theta,alpha){
    n=length(theta)
