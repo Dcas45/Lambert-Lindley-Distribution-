@@ -129,15 +129,15 @@ kurt <- function(t,a){
 
 t<- seq(0.01,20,length=20)
 a <- seq(0.01,exp(1),length=20)
-z1 <- outer(t,a,function(t,a){cv(t,a)})
+z3 <- outer(t,a,function(t,a){cv(t,a)})
 persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="COEFICIENTE DE VARIACION",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
 
 t <- seq(0.01,5,length=20)
 a <- seq(0.01,exp(1),length=20)
-z1 <- outer(t,a,function(t,a){skew(t,a)})
+z3 <- outer(t,a,function(t,a){skew(t,a)})
 persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="ASIMETRIA",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
  
-z1 <- outer(t,a,function(t,a){kurt(t,a)})
 t <- seq(0.1,20,length=20)
 a <- seq(0.1,exp(1),length=20)
+z3 <- outer(t,a,function(t,a){kurt(t,a)})
 persp3D(t,a,z1,xlab="THETA",ylab="ALFA",zlab="CURTOSIS",bty="f",expand=1,d=110,theta=140,phi=10,ticktype="detailed",facets = FALSE, colkey=FALSE)
