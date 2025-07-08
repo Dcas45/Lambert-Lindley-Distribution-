@@ -1,0 +1,119 @@
+# --------------------------------------------------------------------------
+# Density functions, cumulative distribution functions and failure rates ---
+# --------------------------------------------------------------------------
+
+# -----------
+# Lindley ---
+# -----------
+
+ dL <- function(x,t){
+   t^2/(t+1)*(1+x)*exp(-t*x)
+ }
+
+ pL <- function(x,t){
+  1-((t+1+t*x)/(t+1))*exp(-t*x) 
+ }
+
+ hL <- function(x,t){
+   dL(x,t)/(1-pL(x,t))
+ }
+
+# -----------------
+# Power Lindley ---
+# -----------------
+
+ dPL <- function(x,t,a){
+   t^2/(t+1)*a*x^{a-1}*(1+x^a)*exp(-t*x^a)
+ }
+
+ pPL <- function(x,t,a){
+   1-((1+(t/(t+1))*x^a)*exp(-t*x^a))
+ }
+
+ hPL <- function(x,t,a){
+   dPL(x,t,a)/(1-pPL(x,t,a))
+ }
+
+# -----------------------
+# Generalized Lindley ---
+# -----------------------
+
+ dGL <- function(x,t,a){
+   a*t^2/(1+t)*(1+x)*(1-(1+t+t*x)/(1+t)*exp(-t*x))^{a-1}*exp(-t*x)
+ }
+
+ pGL <- function(x,t,a){
+  (1-((t+1+t*x)/(t+1))*exp(-t*x))^a
+ }
+
+ hGL <- function(x,t,a){
+   dGL(x,t,a)/(1-pGL(x,t,a))
+ }
+ 
+# ----------------------
+# Transmuted Lindley ---
+# ----------------------
+
+ dTL <- function(x,t,a){
+   t^2/(t+1)*(1+x)*exp(-t*x)*(1-a+2*a*(t+1+t*x)/(t+1)*exp(-t*x))
+ }
+
+ pTL <- function(x,t,a){
+   (1-(t+1+t*x)/(t+1)*exp(-t*x))*(1+(t+1+t*x)/(t+1)*exp(-t*x))
+ }
+
+ hTL <- function(x,t,a){
+   dTL(x,t,a)/(1-pTL(x,t,a))
+ }
+
+# --------------------------
+# Marshall-Olkin Lindley ---
+# --------------------------
+
+ dMOL <- function(x,t,a){
+   d <- t^2/(1+t)*(1+x)*exp(-t*x)
+   p <- 1-(t+1+t*x)/(t+1)*exp(-t*x)
+     a*d/(1-(1-a)*(1-p))^2
+ }
+
+ pMOL <- function(x,t,a){
+   p = 1-(t+1+t*x)/(t+1)*exp(-t*x)
+     p/(a+(1-a)*p)
+ }
+
+ hMOL <- function(x,t,a){
+   dMOL(x,t,a)/(1-pMOL(x,t,a))
+ }
+
+# -----------
+# Weibull ---
+# -----------
+
+ dW <- function(x,a,b){
+   dweibull(x,a,b)
+ }
+
+ pW <- function(x,a,b){
+   pweibull(x,a,b)
+ }
+
+ hW <- function(x,a,b){
+   dW(x,a,b)/(1-pW(x,a,b))
+ }
+
+# ---------
+# Gamma ---
+# ---------
+
+ dG <- function(x,a,b){
+   dgamma(x,a,b)
+ }
+
+ pG <- function(x,a,b){
+   pgamma(x,a,b)
+ }
+
+ hG <- function(x,a,b){
+   dG(x,a,b)/(1-pG(x,a,b))
+ }
+
