@@ -3,7 +3,7 @@
 library(rootSolve)# To numerically solve systems of nonlinear equations.
  
 # -------------------------------------------
-# Generación de números pseudo-aleatorios ---
+# Generation of pseudo-random numbers -------
 # -------------------------------------------
  
 set.seed(3)
