@@ -1,10 +1,7 @@
-#------------------------------------------------
-Se debe cargar previamente los archivos 
-#01,
-#03,
-#04
-#------------------------------------------------
-
+#The following files must be run beforehand:
+# 01. Structural functions
+# 03. ML estimator for LTL distribution
+# 04. Some conventional distributions
 
 
 
