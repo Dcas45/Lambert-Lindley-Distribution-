@@ -2,7 +2,7 @@
 # Packages used --------- 
 # -----------------------
 
-library(lamW) # Para el computo de la función W de Lambert
+library(lamW) # For computing the Lambert W function
 
 # -----------------------
 # Density function ------ 
