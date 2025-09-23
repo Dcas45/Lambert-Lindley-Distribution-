@@ -1,30 +1,30 @@
 # -----------------------
-# Paquetes utilizados --- 
+# Packages used --------- 
 # -----------------------
 
 library(lamW) # Para el computo de la función W de Lambert
 
 # -----------------------
-# Función de densidad --- 
+# Density function ------ 
 # -----------------------
 
-dLL <- function(x,t,a){
+ dLL <- function(x,t,a){
   t^2/(t+1)*(1+x)*exp(-t*x)*a^(1-(t+1+t*x)/(t+1)*exp(-t*x))*(1-log(a)*(t+1+t*x)/(t+1)*exp(-t*x))
  }
 
-# ---------------------
-# Función acumulada --- 
-# ---------------------
+# -----------------------
+# Cumulative function --- 
+# -----------------------
 
-pLL <- function(x,t,a){
+ pLL <- function(x,t,a){
    1-(t+1+t*x)/(t+1)*exp(-t*x)*a^(1-(t+1+t*x)/(t+1)*exp(-t*x))
  }
 
-# -------------------
-# Función cuantil --- 
-# -------------------
+# ---------------------
+# Quantile function --- 
+# ---------------------
 
-qLL <- function(u,t,a){
+ qLL <- function(u,t,a){
   n = length(u)
   f = rep(0,n)
   for(i in 1:n){
@@ -39,7 +39,7 @@ qLL <- function(u,t,a){
 }
 
 # ------------------------
-# Graficas de densidad --- 
+# Density graphs --------- 
 # ------------------------
 
 t <- 0.5 
@@ -55,7 +55,6 @@ a <- 2.5
 curve(dLL(x,t,a),add=TRUE,col="orange",lty=5,lwd=2)
 box()
 legend("topright",c("0.2","0.5","1","1.5","2.5"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
- 
 t <- 5 
 a <- 0.2
 curve(dLL(x,t,a),0,1.5,ylim=c(0,5), col = "red", xlab = "x", ylab = "Función  de densidad",cex.lab=1.3,lty=3,lwd=2,main=expression(paste(LL(theta==5,alpha))))
@@ -71,7 +70,7 @@ box()
 legend("topright",c("0.2","0.5","1","1.5","2.5"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
 # -------------------------
-# Graficas de acumulada --- 
+# Cumulative graphs ------- 
 # -------------------------
 
 t <- 5
@@ -88,7 +87,7 @@ curve(pLL(x,t,a),col = "orange",add=TRUE, lty=5,lwd=2)
 legend("bottomright",c("0.2","0.5","1","1.5","2.5"),lty=c(2,3,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
 # ------------------------
-# Graficas de cuantil ----
+# Quantile graphs---------
 # ------------------------
 
 t <- 5
@@ -103,7 +102,5 @@ curve(qLL(x,t,a),col = "green",add=TRUE, lty=4,lwd=2)
 a <-2.5
 curve(qLL(x,t,a),col = "orange",add=TRUE, lty=5,lwd=2)
 legend("topleft",c("0.2","0.5","1","1.5","2.5"),lty=c(2,3,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
-
-
 
 
