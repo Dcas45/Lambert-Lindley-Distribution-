@@ -20,18 +20,17 @@ x <- c(
 33, 27)
 
 
-
 # -----------
 # LL fit ---
 # -----------
 
  fit <- optim(par=c( 0.01,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,lower=c(1e-12,1e-12),upper=c(Inf,Inf),x=x)
- fit$par 
- fit$value 
+ fit$par # 0.06658306 0.24301665 
+ fit$value #  1157.527
  AIC=-2*(- 1157.527)+2*2
- AIC
+ AIC# 2319.054
  BIC=-2*(- 1157.527)+2*log(300)
- BIC
+ BIC# 2326.462
  hessiana <- fit$hessian
  vcov_matrix <- solve(hessiana)
  error_estandar <- sqrt(diag(vcov_matrix))
@@ -41,14 +40,123 @@ x <- c(
 # PL GL TL MOL L W and G fits -----
 # ---------------------------------
 
+ fit <- optim(par=c(0.01,0.05),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,lower=c(1e-12,1e-12),upper=c(Inf,Inf),x=x)
+ fit$par 
+ fit$value  
+ AIC=-2*(-1160.147)+2*2
+ AIC# 2324.294
+ BIC=-2*(-1160.147)+2*log(300)
+ BIC# 2331.702
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
 
+ fit <- optim(par=c(0.05,0.05),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,lower=c(1e-12,1e-12),upper=c(Inf,Inf),x=x)
+ fit$par 
+ fit$value  
+ AIC=-2*(-1161.424)+2*2
+ AIC#   2326.848
+ BIC=-2*(-1161.424)+2*log(300)
+ BIC# 2334.256
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
 
+ fit <- optim(par=c(0.0825118,0.5601557),fn=loglik,method=c("BFGS"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ AIC=-2*(- 1158.895)+2*2
+ AIC#  2321.79
+ BIC=-2*(- 1158.895)+2*log(300)
+ BIC#  2329.198
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
+
+ fit <- optim(par=c(0.01,0.05),fn=loglik,method=c("L-BFGS-B"),lower=c(1e-12,1e-12),upper=c(Inf,Inf),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ AIC=-2*(- 1158.073)+2*2
+ AIC#  2320.146
+ BIC=-2*(-1158.073)+2*log(300)
+ BIC# 2327.554
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
+
+ fit <- optim(par=c(0.01),fn=loglik,method=c("BFGS"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value
+ AIC=-2*(-1162.358)+2*1
+ AIC#2326.716
+ BIC=-2*(-1162.358)+1*log(300)
+ BIC# 2330.42
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
+
+ fit <- optim(par=c(0.01,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ AIC=-2*(-1162.115)+2*2
+ AIC#  2328.23
+ BIC=-2*(-1162.115)+2*log(300)
+ BIC# 2335.638
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
+
+ fit <- optim(par=c(0.1,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ AIC=-2*(- 1158.701)+2*2
+ AIC#  2321.402
+ BIC=-2*(- 1158.701)+2*log(300)
+ BIC#  2328.81
+ hessiana <- fit$hessian
+ vcov_matrix <- solve(hessiana)
+ error_estandar <- sqrt(diag(vcov_matrix))
+ error_estandar
+ 
 # ----------------------------------
 # Histogram and fitted densities ---
 # ----------------------------------
 
-
-
+ hist(x,freq=F,nclass=21,ylim=c(0,0.05), main="", cex.lab=1.3 ,xlab=" Días de estadía ", ylab="Función  de densidad", col="white")
+ box()
+ t <-  0.06658306 
+ a  <- 0.24301665
+ curve(dLL(x,t,a),add=TRUE,col="black",lw=2) 
+ t <- 0.1296847 
+ a <- 0.9257503
+ curve(dPL(x,t,a),add=TRUE,col="red",lw=2,lty=2)
+ t <- 0.09735386 
+ a <- 0.89313071
+ curve(dGL(x,t,a),add=TRUE,col="blue",lw=2,lty=3)
+ t <-  0.0825118 
+ a <- 0.5601557
+ curve(dTL(x,t,a),add=TRUE,col="yellow",lw=2,lty=4)
+ t <- 0.07511333 
+ a <- 0.45285288 
+ curve(dMOL(x,t,a),add=TRUE,col="green",lw=2,lty=5)
+ t <- 0.1033819
+ curve(dL(x,t),add=TRUE,col="orange",lw=2,lty=6)
+ t <-  1.255338 
+ a <- 19.907177
+ curve(dweibull(x,shape=t,scale=a),add=TRUE,col="skyblue",lw=2,lty=8)
+ t <-  1.55656 
+ a <- 11.84664
+ curve(dgamma(x,shape=t,scale=a),add=TRUE,col="purple",lw=2,lty=9)
+ t <-  0.06658306 
+ a  <- 0.24301665
+ curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
+ legend("topright", legend = c("LL","PL","GL","TL","MOL","L","W","G"), col = c("black","Red","blue","yellow","green","orange","sky blue","purple"), lwd = 2, lty=c(1:6,8,9))
 
 # ---------------------------------------------------------------
 # Goodness of fit tests of Anderson–Darling y Cramér–von Mises---
@@ -56,4 +164,42 @@ x <- c(
 
  library(goftest) 
 
+ t <-  0.06658306 
+ a  <- 0.24301665
+ ad.test(x, "pLL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pLL", t = t, a= a, estimated = FALSE)
+
+ t <- 0.1296847 
+ a <- 0.9257503
+ ad.test(x, "pPL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pPL", t = t, a= a, estimated = FALSE)
+
+ t <- 0.09735386 
+ a <- 0.89313071
+ ad.test(x, "pGL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pGL", t = t, a= a, estimated = FALSE)
+
+ t <- 0.0825118 
+ a <- 0.5601557
+ ad.test(x, "pTL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pTL", t = t, a= a, estimated = FALSE)
+
+ t <- 0.07511333 
+ a <- 0.45285288 
+ ad.test(x, "pMOL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pMOL", t = t, a= a, estimated = FALSE)
+
+ t <-0.1033819# 
+ ad.test(x, "pL", t = t, estimated = FALSE) 
+ cvm.test(x, "pL", t = t, estimated = FALSE)
+
+ t <-  1.255338 
+ a <- 19.907177
+ ad.test(x, "pweibull", scale = a, shape = t, estimated = FALSE) 
+ cvm.test(x, "pweibull", scale = a, shape = t, estimated = FALSE)
+
+ t <-  1.55656 
+ a <- 11.84664 
+ ad.test(x, "pgamma", scale = a, shape = t, estimated = FALSE) 
+ cvm.test(x, "pgamma", scale = a, shape = t, estimated = FALSE)
 
