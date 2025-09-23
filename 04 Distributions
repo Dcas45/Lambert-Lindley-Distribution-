@@ -1,10 +1,10 @@
-# --------------------------------------------------------------------------
-# Density functions, cumulative distribution functions and failure rates ---
-# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
+# Density functions, cumulative distribution functions, failure rates and log-likelihood functions. ------
+# --------------------------------------------------------------------------------------------------------
 
-# -----------
-# Lindley ---
-# -----------
+# ---------------------
+# Lindley -------------
+# --------------------
 
  dL <- function(x,t){
    t^2/(t+1)*(1+x)*exp(-t*x)
@@ -18,9 +18,13 @@
    dL(x,t)/(1-pL(x,t))
  }
 
-# -----------------
-# Power Lindley ---
-# -----------------
+ loglik <- function(p,x){
+   -sum(log(dL(x,p[1])))
+ }
+
+# ------------------------
+# Power Lindley ----------
+# ------------------------
 
  dPL <- function(x,t,a){
    t^2/(t+1)*a*x^{a-1}*(1+x^a)*exp(-t*x^a)
@@ -32,6 +36,10 @@
 
  hPL <- function(x,t,a){
    dPL(x,t,a)/(1-pPL(x,t,a))
+ }
+
+ loglik <- function(p,x){
+   -sum(log(dPL(x,p[1],p[2])))
  }
 
 # -----------------------
@@ -49,7 +57,11 @@
  hGL <- function(x,t,a){
    dGL(x,t,a)/(1-pGL(x,t,a))
  }
- 
+
+  loglik <- function(p,x){
+  -sum(log(dGL(x,p[1],p[2])))
+ }
+
 # ----------------------
 # Transmuted Lindley ---
 # ----------------------
@@ -64,6 +76,10 @@
 
  hTL <- function(x,t,a){
    dTL(x,t,a)/(1-pTL(x,t,a))
+ }
+
+ loglik <- function(p,x){
+  -sum(log(dTL(x,p[1],p[2])))
  }
 
 # --------------------------
@@ -85,9 +101,12 @@
    dMOL(x,t,a)/(1-pMOL(x,t,a))
  }
 
-# -----------
-# Weibull ---
-# -----------
+ loglik <- function(p,x){
+  -sum(log(dMOL(x,p[1],p[2])))
+ }
+# -----------------------
+# Weibull ---------------
+# -----------------------
 
  dW <- function(x,a,b){
    dweibull(x,a,b)
@@ -101,9 +120,13 @@
    dW(x,a,b)/(1-pW(x,a,b))
  }
 
-# ---------
-# Gamma ---
-# ---------
+loglik <- function(p,x){
+   -sum(log(dweibull(x,p[1],p[2])))
+ }
+
+# ----------------------
+# Gamma ----------------
+# ----------------------
 
  dG <- function(x,a,b){
    dgamma(x,a,b)
@@ -117,3 +140,6 @@
    dG(x,a,b)/(1-pG(x,a,b))
  }
 
+ loglik <- function(p,x){
+   -sum(log(dgamma(x,shape=p[1],scale=p[2])))
+ }
