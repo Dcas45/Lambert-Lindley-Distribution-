@@ -1,12 +1,12 @@
 # -----------------------
-# Paquetes utilizados --- 
+# Packages used---------- 
 # -----------------------
 
 library(lamW) # Para el computo de la función W de Lambert
 library(plot3D) # Para el computo de gráficos 3D
 
 # ------------------------------
-# Función mk para figuras 2D --- 
+# mk function for 2D figures--- 
 # ------------------------------
 
  mk <- function(k,theta,alpha){
@@ -20,7 +20,7 @@ library(plot3D) # Para el computo de gráficos 3D
  }
 
 # ------------------------------------------------------------------
-# Coeficiente de variación, asimetría y curtosis para figuras 2D ---
+# Coefficient of variation, skewness and kurtosis for 2D figures ---
 # ------------------------------------------------------------------
  
 cv <- function(t,a){
@@ -44,9 +44,9 @@ kurt <- function(t,a){
    (m4-4*m1*m3+6*m1^2*m2-3*m1^4)/(m2-m1^2)^{2}
 }
  
-# ---------------
-# Gráficos 2D ---
-# ---------------
+# ----------------
+# 2D Graphics-----
+# ----------------
  
 alpha <- 1
 curve(cv(x,alpha),0,20,ylim=c(0.4,2),lwd=2,ylab="Coeficiente de variación",xlab=expression(theta),cex.lab=1.3)
@@ -85,7 +85,7 @@ curve(kurt(x,alpha),add=TRUE,lty=5,lwd=2,col="orange")
 legend("topleft",c("0.5","0.8","1","1.5","2.7"),lty=c(3,2,1,4,5),title=expression(alpha),lwd=2,col=c("red","blue","black","green","orange"))
 
 # -------------------------------
-# Función mk1 para figuras 3D --- 
+# mk1 function for 3D figures --- 
 # -------------------------------
 
 mk1 <- function(k,theta,alpha){
@@ -99,7 +99,7 @@ mk1 <- function(k,theta,alpha){
  }
 
 # ------------------------------------------------------------------
-# Coeficiente de variación, asimetría y curtosis para figuras 3D ---
+# Coefficient of variation, skewness and kurtosis for 3D figures----
 # ------------------------------------------------------------------
  
 cv <- function(t,a){
@@ -124,7 +124,7 @@ kurt <- function(t,a){
 }
 
 # ---------------
-# Gráficos 3D ---
+# 3D Graphics ---
 # ---------------
 
 t<- seq(0.01,20,length=20)
