@@ -2,8 +2,8 @@
 # Packages used---------- 
 # -----------------------
 
-library(lamW) # Para el computo de la función W de Lambert
-library(plot3D) # Para el computo de gráficos 3D
+library(lamW) # For computing the Lambert W function
+library(plot3D) # For computing 3D graphs
 
 # ------------------------------
 # mk function for 2D figures--- 
