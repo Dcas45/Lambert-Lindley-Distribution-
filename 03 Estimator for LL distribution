@@ -1,6 +1,6 @@
-# Nota: Se requiere rodar previamente el archivo 01 Funciones estructurales
- 
-library(rootSolve)# Para resolver numericamente sistemas de ecuaciones no lineales
+# Note: File 01 Structural Functions must be run first.
+
+library(rootSolve)# To numerically solve systems of nonlinear equations.
  
 # -------------------------------------------
 # Generación de números pseudo-aleatorios ---
@@ -19,7 +19,7 @@ hist(x,freq=F,nclass=21,main="",xlab="Números pseudo-aleatorios",ylab="Función
 curve(dLL(x,t,a),add=T)
  
 # ------------------------------------------------------------------
-# Ecuaciones requeridas para el computo del estimador de momento ---
+# Equations required for the computation of the moment estimator ---
 # ------------------------------------------------------------------
  
 mk <- function(k,theta,alpha){
@@ -46,7 +46,7 @@ sistema <- function(p,x) {
 }
 
 # -----------------------------------------------
-# Estimador de momento desde muestra generada ---
+# Moment estimator from generated sample --------
 # -----------------------------------------------
  
 EM <- try(multiroot(f = sistema, start = c(t, a), x=x)$root,silent=TRUE)
@@ -59,7 +59,7 @@ box()
 legend("topright",c("Valores verdaderos","Estimador de momento"),lty=1:2,lwd=2,col=c("black","red"),title="FDA equipada con:")
  
 # -----------------------------
-# Función log-verosimilitud ---
+# Log-likelihood function -----
 # -----------------------------
  
 loglik <- function(p,x){
