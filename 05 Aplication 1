@@ -134,43 +134,79 @@
 # Histogram and fitted densities ---
 # ----------------------------------
 
+ hist(x,freq=F,nclass=12,ylim=c(0,0.4),main="",cex.lab=1.3,xlab="Tiempos ruptura", ylab="Función  de densidad",col="white")
+ box()
+ t <-   1.061576  
+ a  <-  1.958040
+ curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
+ t <- 0.7047341 
+ a <- 1.1423977
+ curve(dPL(x,t,a),add=TRUE,col="red",lw=2,lty=2)
+ t <- 0.9362637  
+ a <- 1.3902774 
+ curve(dGL(x,t,a),add=TRUE,col="blue",lw=2,lty=3)
+ t <- 0.4933331 
+ a <- 0.9773532      
+ curve(dTL(x,t,a),add=TRUE,col="yellow",lw=2,lty=4)
+ t <- 1.036629   
+ a <- 1.974727 
+ curve(dMOL(x,t,a),add=TRUE,col="green",lw=2,lty=5)
+ t <- 0.7947831 
+ curve(dL(x,t),add=TRUE,col="orange",lw=2,lty=6)
+ t <- 1.325612
+ a <- 2.132817
+ curve(dweibull(x,shape=t,scale=a),add=TRUE,col="skyblue",lw=2,lty=8)
+ t <- 1.641079 
+  a <- 0.837610
+ curve(dgamma(x,t,a),add=TRUE,col="purple",lw=2,lty=9)
+ t <-   1.061576  
+ a  <-  1.958040
+ curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
+ legend("topright", legend = c("LL","PL","GL","TL","MOL","L","W","G"), col = c("black","Red","blue","yellow","green","orange","sky blue","purple"), lwd = 2, lty=c(1:6,8,9))
 
 
+# ---------------------------------------------------------------
+# Goodness of fit tests of Anderson–Darling y Cramér–von Mises---
+# ---------------------------------------------------------------
 
+ library(goftest) 
 
+ t <- 1.061576 
+ a <- 1.958040
+ ad.test(x, "pLL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pLL", t = t, a= a, estimated = FALSE)
 
+ t <- 0.7047341 
+ a <- 1.1423977
+ ad.test(x, "pPL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pPL", t = t, a= a, estimated = FALSE)
 
+ t <-  0.9362637 
+ a <- 1.3902774
+ ad.test(x, "pGL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pGL", t = t, a= a, estimated = FALSE)
 
+ t <- 0.4933331 
+ a <- 0.9773532 
+ ad.test(x, "pTL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pTL", t = t, a= a, estimated = FALSE)
 
+ t <- 1.036629 
+ a <- 1.974727
+ ad.test(x, "pMOL", t = t, a= a, estimated = FALSE) 
+ cvm.test(x, "pMOL", t = t, a= a, estimated = FALSE)
 
+ t <- 0.7947831 
+ ad.test(x, "pL", t = t, estimated = FALSE) 
+ cvm.test(x, "pL", t = t, estimated = FALSE)
 
+ t <- 1.325612
+ a <- 2.132817
+ ad.test(x, "pweibull", scale = a, shape = t, estimated = FALSE) 
+ cvm.test(x, "pweibull", scale = a, shape = t, estimated = FALSE)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ t <-  1.641041 
+ a <- 1.193908
+ ad.test(x, "pgamma", scale = t, shape = a, estimated = FALSE) 
+ cvm.test(x, "pgamma", scale = t, shape = a, estimated = FALSE)
 
