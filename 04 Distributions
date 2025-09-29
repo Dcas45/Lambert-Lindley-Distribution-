@@ -18,7 +18,7 @@
    dL(x,t)/(1-pL(x,t))
  }
 
- loglik <- function(p,x){
+ loglikL <- function(p,x){
    -sum(log(dL(x,p[1])))
  }
 
@@ -38,7 +38,7 @@
    dPL(x,t,a)/(1-pPL(x,t,a))
  }
 
- loglik <- function(p,x){
+ loglikPL <- function(p,x){
    -sum(log(dPL(x,p[1],p[2])))
  }
 
@@ -58,7 +58,7 @@
    dGL(x,t,a)/(1-pGL(x,t,a))
  }
 
-  loglik <- function(p,x){
+  loglikGL <- function(p,x){
   -sum(log(dGL(x,p[1],p[2])))
  }
 
@@ -78,7 +78,7 @@
    dTL(x,t,a)/(1-pTL(x,t,a))
  }
 
- loglik <- function(p,x){
+ loglikTL <- function(p,x){
   -sum(log(dTL(x,p[1],p[2])))
  }
 
@@ -101,9 +101,10 @@
    dMOL(x,t,a)/(1-pMOL(x,t,a))
  }
 
- loglik <- function(p,x){
+ loglikMOL <- function(p,x){
   -sum(log(dMOL(x,p[1],p[2])))
  }
+
 # -----------------------
 # Weibull ---------------
 # -----------------------
@@ -120,7 +121,7 @@
    dW(x,a,b)/(1-pW(x,a,b))
  }
 
-loglik <- function(p,x){
+loglikW <- function(p,x){
    -sum(log(dweibull(x,p[1],p[2])))
  }
 
@@ -140,6 +141,6 @@ loglik <- function(p,x){
    dG(x,a,b)/(1-pG(x,a,b))
  }
 
- loglik <- function(p,x){
+ loglikG <- function(p,x){
    -sum(log(dgamma(x,shape=p[1],scale=p[2])))
  }
