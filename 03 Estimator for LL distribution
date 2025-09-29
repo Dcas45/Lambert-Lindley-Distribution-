@@ -62,11 +62,11 @@ legend("topright",c("Valores verdaderos","Estimador de momento"),lty=1:2,lwd=2,c
 # Log-likelihood function -----
 # -----------------------------
  
-loglik <- function(p,x){
+loglikLL <- function(p,x){
   -sum(log(dLL(x,p[1],p[2])))
 }
  
-EMV <- optim(par=c(EM[1],EM[2]),fn=loglik,method=c("L-BFGS-B"),lower=c(1e-12,1e-12),upper=c(Inf,exp(1)),hessian=TRUE,x=x)
+EMV <- optim(par=c(EM[1],EM[2]),fn=loglikLL,method=c("L-BFGS-B"),lower=c(1e-12,1e-12),upper=c(Inf,exp(1)),hessian=TRUE,x=x)
 EMV$par# 1.997024 1.971009
  
 hist(x,freq=F,nclass=21,main="",xlab="Números pseudo-aleatorios",ylab="Función de densidad",cex.lab=1.3)
