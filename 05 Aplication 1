@@ -3,7 +3,6 @@
 # 03. Estimator for LL distribution
 # 04. Some conventional distributions
 
-
 # ------------------------------
 # Stress breakup time Data -----
 # ------------------------------
@@ -17,118 +16,90 @@
  2.4951,2.5260,2.9911,3.0256,3.2678,3.4045,3.4846,3.7433,3.7455,3.9143,4.8073,5.4005,
  5.4435,5.5295,6.5541,9.0960)
 
-
 # -----------
 # LL fit ---
 # -----------
 
- fit <- optim(par=c(0.1,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
- fit$par # 1.061576 1.958040
- fit$value #  121.8453
+ fit <- optim(par=c(0.1,0.5),fn=loglikLL,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ sqrt(diag(solve(fit$hessian)))
+
  AIC=-2*(- 121.8453)+2*2
- AIC# 247.6906
+ AIC
+
  BIC=-2*(- 121.8453)+2*log(n)
- BIC# 252.3521
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC
 
-# ---------------------------------
-# PL GL TL MOL L W and G fits -----
-# ---------------------------------
+# ------------------------------------
+# PL, GL, TL, MOL, W, and G fits -----
+# ------------------------------------
 
- fit <- optim(par=c(0.1,0.05),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
- fit$par #0.7047341 1.1423977
- fit$value  # 122.4001
+ fit <- optim(par=c(0.1,0.05),fn=loglikPL,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ sqrt(diag(solve(fit$hessian)))
+
  AIC=-2*(-122.4001)+2*2
- AIC#  248.8002
+ AIC
+
  BIC=-2*(-122.4001)+2*log(76)
- BIC#  253.4617
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC
 
+ fit <- optim(par=c(0.5,0.01),fn=loglikGL,method=c("BFGS"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value  
+ sqrt(diag(solve(fit$hessian)))
 
- fit <- optim(par=c(0.5,0.01),fn=loglik,method=c("BFGS"),hessian=TRUE,x=x)
- fit$par  #0.9362637 1.3902774
- fit$value  # 121.8991
  AIC=-2*(-121.8991)+2*2
- AIC#  247.7982
+ AIC
+
  BIC=-2*(-121.8991)+2*log(76)
- BIC# 252.4597
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC
 
+ fit <- optim(par=c(0.4933331,0.9773532),fn=loglikTL,method=c("L-BFGS-B"),hessian=TRUE,lower=c(-1,1e-12),upper=c(1,exp(1)),x=x)
+ fit$par 
+ fit$value 
+ sqrt(diag(solve(fit$hessian)))
 
- fit <- optim(par=c(0.4933331,0.9773532),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,lower=c(-1,1e-12),upper=c(1,exp(1)),x=x)
- fit$par #0.4933331 0.9773532
- fit$value # 123.1193
  AIC=-2*(- 123.1193)+2*2
- AIC#  250.2386
+ AIC
+
  BIC=-2*(-123.1193)+2*log(76)
- BIC# 254.9001
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC
 
+ fit <- optim(par=c(0.5,0.5),fn=loglikMOL,method=c("L-BFGS-B"),lower=c(1e-12,1e-12),upper=c(Inf,Inf),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ sqrt(diag(solve(fit$hessian)))
 
- fit <- optim(par=c(0.5,0.5),fn=loglik,method=c("L-BFGS-B"),lower=c(1e-12,1e-12),upper=c(Inf,Inf),hessian=TRUE,x=x)
- fit$par #1.036629 1.974727
- fit$value # 122.6285
  AIC=-2*(- 122.6285)+2*2
- AIC#  249.257
+ AIC
+
  BIC=-2*(-  122.6285)+2*log(76)
- BIC#  253.9185
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC#  
+ 
+ fit <- optim(par=c(0.1,0.5),fn=loglikW,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value
+ sqrt(diag(solve(fit$hessian)))
 
-
- fit <- optim(par=c(0.01),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
- fit$par # 0.7947831
- fit$value # 123.6751
- AIC=-2*(- 123.6751)+2*1
- AIC# 249.3502
- BIC=-2*(- 123.6751)+1*log(n)
- BIC# 251.6809
- hessiana <- fit$hessian
- fisher <- hessiana
- var_t <- solve(fisher)  # varianza del estimador
- error_estandar <- sqrt(diag(var_t))  # error estándar
- error_estandar
-
-
- fit <- optim(par=c(0.1,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
- fit$par #1.325612 2.132817
- fit$value # 122.5247
  AIC=-2*(-122.5247)+2*2
- AIC#  249.0494
+ AIC
+
  BIC=-2*(-122.5247)+2*log(76)
- BIC# 250.5946
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ BIC
+ 
+ fit <- optim(par=c(0.1,0.5),fn=loglikG,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par 
+ fit$value 
+ sqrt(diag(solve(fit$hessian)))
 
-
- fit <- optim(par=c(0.1,0.5),fn=loglik,method=c("L-BFGS-B"),hessian=TRUE,x=x)
- fit$par # 1.641041 1.193908
- fit$value #  122.2494
  AIC=-2*(- 122.2494)+2*2
- AIC#  248.4988
- BIC=-2*(- 122.2494)+2*log(76)
- BIC#  250.044
- hessiana <- fit$hessian
- vcov_matrix <- solve(hessiana)
- error_estandar <- sqrt(diag(vcov_matrix))
- error_estandar
+ AIC
 
+ BIC=-2*(- 122.2494)+2*log(76)
+ BIC
 
 # ----------------------------------
 # Histogram and fitted densities ---
@@ -151,18 +122,16 @@
  t <- 1.036629   
  a <- 1.974727 
  curve(dMOL(x,t,a),add=TRUE,col="green",lw=2,lty=5)
- t <- 0.7947831 
- curve(dL(x,t),add=TRUE,col="orange",lw=2,lty=6)
  t <- 1.325612
  a <- 2.132817
  curve(dweibull(x,shape=t,scale=a),add=TRUE,col="skyblue",lw=2,lty=8)
  t <- 1.641079 
-  a <- 0.837610
+ a <- 0.837610
  curve(dgamma(x,t,a),add=TRUE,col="purple",lw=2,lty=9)
  t <-   1.061576  
  a  <-  1.958040
  curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
- legend("topright", legend = c("LL","PL","GL","TL","MOL","L","W","G"), col = c("black","Red","blue","yellow","green","orange","sky blue","purple"), lwd = 2, lty=c(1:6,8,9))
+ legend("topright", legend = c("LL","PL","GL","TL","MOL","W","G"), col = c("black","Red","blue","yellow","green","sky blue","purple"), lwd = 2, lty=c(1:6,8,9))
 
 
 # ---------------------------------------------------------------
@@ -196,10 +165,6 @@
  ad.test(x, "pMOL", t = t, a= a, estimated = FALSE) 
  cvm.test(x, "pMOL", t = t, a= a, estimated = FALSE)
 
- t <- 0.7947831 
- ad.test(x, "pL", t = t, estimated = FALSE) 
- cvm.test(x, "pL", t = t, estimated = FALSE)
-
  t <- 1.325612
  a <- 2.132817
  ad.test(x, "pweibull", scale = a, shape = t, estimated = FALSE) 
@@ -209,4 +174,3 @@
  a <- 1.193908
  ad.test(x, "pgamma", scale = t, shape = a, estimated = FALSE) 
  cvm.test(x, "pgamma", scale = t, shape = a, estimated = FALSE)
-
