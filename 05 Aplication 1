@@ -107,8 +107,8 @@
 
  hist(x,freq=F,nclass=12,ylim=c(0,0.4),main="",cex.lab=1.3,xlab="Tiempos ruptura", ylab="Función  de densidad",col="white")
  box()
- t <-   1.061576  
- a  <-  1.958040
+ t <- 1.061576  
+ a <- 1.958040
  curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
  t <- 0.7047341 
  a <- 1.1423977
@@ -128,8 +128,8 @@
  t <- 1.641079 
  a <- 0.837610
  curve(dgamma(x,t,a),add=TRUE,col="purple",lw=2,lty=9)
- t <-   1.061576  
- a  <-  1.958040
+ t <- 1.061576  
+ a <- 1.958040
  curve(dLL(x,t,a),add=TRUE,col="black",lwd=2) 
  legend("topright", legend = c("LL","PL","GL","TL","MOL","W","G"), col = c("black","Red","blue","yellow","green","sky blue","purple"), lwd = 2, lty=c(1:6,8,9))
 
@@ -150,7 +150,7 @@
  ad.test(x, "pPL", t = t, a= a, estimated = FALSE) 
  cvm.test(x, "pPL", t = t, a= a, estimated = FALSE)
 
- t <-  0.9362637 
+ t <- 0.9362637 
  a <- 1.3902774
  ad.test(x, "pGL", t = t, a= a, estimated = FALSE) 
  cvm.test(x, "pGL", t = t, a= a, estimated = FALSE)
@@ -170,7 +170,7 @@
  ad.test(x, "pweibull", scale = a, shape = t, estimated = FALSE) 
  cvm.test(x, "pweibull", scale = a, shape = t, estimated = FALSE)
 
- t <-  1.641041 
+ t <- 1.641041 
  a <- 1.193908
  ad.test(x, "pgamma", scale = t, shape = a, estimated = FALSE) 
  cvm.test(x, "pgamma", scale = t, shape = a, estimated = FALSE)
