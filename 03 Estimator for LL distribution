@@ -48,9 +48,12 @@ sistema <- function(p,x) {
 # -----------------------------------------------
 # Moment estimator from generated sample --------
 # -----------------------------------------------
- 
+
+a0 <- 1
+t0 <- (1-mean(x)+sqrt((mean(x)-1)^2+8*mean(x)))/(2*mean(x))
+
 EM <- try(multiroot(f = sistema, start = c(t, a), x=x)$root,silent=TRUE)
-EM# 2.007498 1.992345
+EM# 2.007498 1.992346
  
 hist(x,freq=F,nclass=21,main="",xlab="Números pseudo-aleatorios",ylab="Función de densidad",cex.lab=1.3)
 curve(dLL(x,t,a),add=T,lwd=2)
