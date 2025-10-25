@@ -31,6 +31,21 @@
  BIC=-2*(- 121.8453)+2*log(n)
  BIC
 
+# -----------------------------------
+# Likelihood ratio test (LL vs L) ---
+# -----------------------------------
+
+ loglikL <- function(p,x){
+    -sum(log(dLL(x,p,1)))
+ }
+
+ fit <- optim(par=c(0.1),fn=loglikL,method=c("L-BFGS-B"),hessian=TRUE,x=x)
+ fit$par# 0.7947831
+ fit$value# 123.6751
+
+ round(-2*(-123.6751-(-121.8453)),3)# 3.660
+ round(1-pchisq(3.66,1),3)# 0.056
+
 # ------------------------------------
 # PL, GL, TL, MOL, W, and G fits -----
 # ------------------------------------
